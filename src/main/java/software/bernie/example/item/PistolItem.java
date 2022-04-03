@@ -2,10 +2,10 @@ package software.bernie.example.item;
 
 import java.util.List;
 
-import net.fabricmc.fabric.api.networking.v1.PlayerLookup;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.BowItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.server.world.ServerWorld;
@@ -16,6 +16,7 @@ import net.minecraft.util.Hand;
 import net.minecraft.util.TypedActionResult;
 import net.minecraft.util.UseAction;
 import net.minecraft.world.World;
+import org.quiltmc.qsl.networking.api.PlayerLookup;
 import software.bernie.example.entity.RocketProjectile;
 import software.bernie.example.registry.ItemRegistry;
 import software.bernie.geckolib3.core.AnimationState;
@@ -43,14 +44,12 @@ public class PistolItem extends Item implements IAnimatable, ISyncable {
 
 	@Override
 	public void onStoppedUsing(ItemStack stack, World worldIn, LivingEntity entityLiving, int remainingUseTicks) {
-		if (entityLiving instanceof PlayerEntity) {
-			PlayerEntity playerentity = (PlayerEntity) entityLiving;
+		if (entityLiving instanceof PlayerEntity playerEntity) {
 			if (stack.getDamage() < (stack.getMaxDamage() - 1)) {
-				playerentity.getItemCooldownManager().set(this, 5);
+				playerEntity.getItemCooldownManager().set(this, 5);
 				if (!worldIn.isClient) {
-					RocketProjectile abstractarrowentity = createArrow(worldIn, stack, playerentity);
-					abstractarrowentity.setVelocity(playerentity, playerentity.getPitch(), playerentity.getYaw(), 0.0F,
-							1.0F * 3.0F, 1.0F);
+					RocketProjectile abstractarrowentity = createArrow(worldIn, stack, playerEntity);
+					abstractarrowentity.setProperties(playerEntity, playerEntity.getPitch(), playerEntity.getYaw(), 0.0F, 3.0F, 1.0F);
 
 					abstractarrowentity.setDamage(2.5);
 					abstractarrowentity.age = 35;
@@ -61,8 +60,8 @@ public class PistolItem extends Item implements IAnimatable, ISyncable {
 				}
 				if (!worldIn.isClient) {
 					final int id = GeckoLibUtil.guaranteeIDForStack(stack, (ServerWorld) worldIn);
-					GeckoLibNetwork.syncAnimation(playerentity, this, id, ANIM_OPEN);
-					for (PlayerEntity otherPlayer : PlayerLookup.tracking(playerentity)) {
+					GeckoLibNetwork.syncAnimation(playerEntity, this, id, ANIM_OPEN);
+					for (PlayerEntity otherPlayer : PlayerLookup.tracking(playerEntity)) {
 						GeckoLibNetwork.syncAnimation(otherPlayer, this, id, ANIM_OPEN);
 					}
 				}

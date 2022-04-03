@@ -5,11 +5,11 @@ import java.util.Map;
 import java.util.function.Supplier;
 
 import io.netty.buffer.Unpooled;
-import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.network.PacketByteBuf;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.util.Identifier;
+import org.quiltmc.qsl.networking.api.ServerPlayNetworking;
 import software.bernie.geckolib3.GeckoLib;
 
 public class GeckoLibNetwork {

@@ -1,13 +1,9 @@
 package software.bernie.example.registry;
 
-import net.fabricmc.fabric.api.client.itemgroup.FabricItemGroupBuilder;
 import net.minecraft.entity.EquipmentSlot;
-import net.minecraft.item.ArmorMaterials;
-import net.minecraft.item.BlockItem;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemGroup;
-import net.minecraft.item.ItemStack;
+import net.minecraft.item.*;
 import net.minecraft.util.Identifier;
+import org.quiltmc.qsl.item.group.api.QuiltItemGroup;
 import software.bernie.example.item.JackInTheBoxItem;
 import software.bernie.example.item.PistolItem;
 import software.bernie.example.item.PotatoArmorItem;
@@ -15,9 +11,8 @@ import software.bernie.geckolib3.GeckoLib;
 
 public class ItemRegistry {
 
-	public static ItemGroup geckolibItemGroup = FabricItemGroupBuilder
-			.create(new Identifier(GeckoLib.ModID, "geckolib_examples"))
-			.icon(() -> new ItemStack(ItemRegistry.JACK_IN_THE_BOX)).build();
+	public static final ItemGroup geckolibItemGroup = QuiltItemGroup.createWithIcon(new Identifier(GeckoLib.ModID, "geckolib_examples"), () -> new ItemStack(ItemRegistry.JACK_IN_THE_BOX));
+
 
 	public static final JackInTheBoxItem JACK_IN_THE_BOX = RegistryUtils.registerItem("jackintheboxitem",
 			new JackInTheBoxItem(new Item.Settings().group(geckolibItemGroup)));

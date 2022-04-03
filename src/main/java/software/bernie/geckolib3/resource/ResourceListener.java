@@ -1,7 +1,6 @@
 package software.bernie.geckolib3.resource;
 
 import net.minecraft.client.MinecraftClient;
-import net.minecraft.resource.ReloadableResourceManagerImpl;
 import software.bernie.geckolib3.GeckoLib;
 
 public class ResourceListener {

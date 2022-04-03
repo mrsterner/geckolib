@@ -6,7 +6,6 @@
 package software.bernie.example;
 
 import net.fabricmc.api.ModInitializer;
-import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
 import net.fabricmc.loader.api.FabricLoader;
 import software.bernie.example.registry.*;
 import software.bernie.geckolib3.GeckoLib;

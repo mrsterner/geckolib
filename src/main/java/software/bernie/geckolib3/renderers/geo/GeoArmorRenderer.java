@@ -5,8 +5,6 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.concurrent.ConcurrentHashMap;
 
-import net.fabricmc.fabric.api.client.rendering.v1.ArmorRenderer;
-import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.render.OverlayTexture;
 import net.minecraft.client.render.RenderLayer;
@@ -22,6 +20,7 @@ import net.minecraft.item.ArmorItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Identifier;
+import org.quiltmc.loader.api.QuiltLoader;
 import software.bernie.geckolib3.compat.PatchouliCompat;
 import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.controller.AnimationController;
@@ -130,7 +129,7 @@ public class GeoArmorRenderer<T extends ArmorItem & IAnimatable> implements IGeo
 				(float) renderColor.getRed() / 255f, (float) renderColor.getGreen() / 255f,
 				(float) renderColor.getBlue() / 255f, (float) renderColor.getAlpha() / 255);
 
-		if (FabricLoader.getInstance().isModLoaded("patchouli")) {
+		if (QuiltLoader.isModLoaded("patchouli")) {
 			PatchouliCompat.patchouliLoaded(stack);
 		}
 		stack.pop();
