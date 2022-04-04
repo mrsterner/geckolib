@@ -50,7 +50,7 @@ public class AnimationFileLoader {
 
 	@SuppressWarnings("deprecation")
 	public static String getResourceAsString(Identifier location, ResourceManager manager) {
-		try (InputStream inputStream = manager.getResource(location).getInputStream()) {
+		try (InputStream inputStream = manager.method_14486(location).getInputStream()) {//TODO ResourceManager@getResource();
 			return IOUtils.toString(inputStream);
 		} catch (Exception e) {
 			String message = "Couldn't load " + location;
